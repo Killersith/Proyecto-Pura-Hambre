@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pura Hambre</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+	/* WhatsApp flotante */
+	.whatsapp-float{
+    	position: fixed;
+    	width: 65px;
+    	height: 65px;
+    	bottom: 25px;
+    	right: 25px;
+    	z-index: 9999;
+    	transition: 0.3s;
+}
+
+.whatsapp-float img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.whatsapp-float:hover{
+    transform: scale(1.1);
+}
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Poppins', sans-serif;
+            background:black;
+            color:white;
+        }
+
+        .pagina{
+            display:none;
+            min-height:100vh;
+        }
+
+        .activa{
+            display:block;
+        }
+
+        header{
+            background:orange;
+            text-align:center;
+            padding:25px;
+        }
+
+        header h1{
+            font-size:45px;
+        }
+
+        nav{
+            background:white;
+            padding:15px;
+            text-align:center;
+            position:sticky;
+            top:0;
+            z-index:1000;
+        }
+
+        nav a{
+            text-decoration:none;
+            color:black;
+            margin:20px;
+            font-weight:bold;
+            cursor:pointer;
+        }
+
+        nav a:hover{
+            color:orange;
+        }
+
+        .titulo{
+            text-align:center;
+            margin-top:40px;
+            font-size:35px;
+            color:orange;
+        }
+
+        .contenedor{
+            display:flex;
+            justify-content:center;
+            flex-wrap:wrap;
+            padding:20px;
+        }
+
+        .card{
+            background:#1b1b1b;
+            width:250px;
+            margin:15px;
+            border-radius:15px;
+            overflow:hidden;
+            box-shadow:0px 4px 10px rgba(255,255,255,0.1);
+            transition:0.3s;
+        }
+
+        .card:hover{
+            transform:scale(1.05);
+        }
+
+        .card img{
+            width:100%;
+            height:180px;
+            object-fit:cover;
+        }
+
+        .card h3{
+            text-align:center;
+            margin-top:10px;
+        }
+
+        .card p{
+            text-align:center;
+            color:#ccc;
+            margin:10px;
+        }
+
+        .card button{
+            display:block;
+            margin:15px auto;
+            padding:10px 20px;
+            border:none;
+            border-radius:8px;
+            background:orange;
+            color:white;
+            cursor:pointer;
+            font-weight:bold;
+        }
+
+        .card button:hover{
+            background:#ff8800;
+        }
+
+        #carrito{
+            background:#111;
+            padding:30px;
+            margin:30px;
+            border-radius:15px;
+        }
+
+        #lista-carrito li{
+            margin:10px 0;
+        }
+
+        .btn-pagar{
+            background:green;
+            padding:12px 25px;
+            border:none;
+            border-radius:8px;
+            color:white;
+            font-size:16px;
+            cursor:pointer;
+            margin-top:15px;
+        }
+
+        .btn-pagar:hover{
+            background:darkgreen;
+        }
+
+        #contacto{
+            text-align:center;
+            padding:40px;
+        }
+
+        #contacto p{
+            margin:10px;
+            font-size:18px;
+        }
+
+        #pago{
+            background:#1b1b1b;
+            width:400px;
+            margin:40px auto;
+            padding:30px;
+            border-radius:15px;
+        }
+
+        #pago input,
+        #pago select{
+            width:100%;
+            padding:12px;
+            margin:10px 0;
+            border:none;
+            border-radius:8px;
+        }
+
+        #pago button{
+            width:100%;
+            padding:12px;
+            background:orange;
+            border:none;
+            border-radius:8px;
+            color:white;
+            font-size:16px;
+            cursor:pointer;
+        }
+
+        #mensaje{
+            text-align:center;
+            font-size:25px;
+            color:lightgreen;
+            margin-top:30px;
+            display:none;
+        }
+
+        footer{
+            background:orange;
+            text-align:center;
+            padding:15px;
+            margin-top:30px;
+            color:white;
+        }
+
+        /* Estilo para los enlaces del footer */
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Pura Hambre</h1>
+    <p>La mejor comida rápida para quitarte el hambre</p>
+</header>
+
+<nav>
+    <a onclick="mostrarPagina('inicio')">Inicio</a>
+    <a onclick="mostrarPagina('menu')">Menú</a>
+    <a onclick="mostrarPagina('carrito-pagina')">Carrito</a>
+    <a onclick="mostrarPagina('contacto-pagina')">Contacto</a>
+</nav>
+
+<div id="inicio" class="pagina activa">
+
+    <h2 class="titulo">🍔 Bienvenido a Pura Hambre</h2>
+
+    <p style="text-align:center; font-size:20px; margin-top:20px;">
+        La mejor comida rápida para quitarte el hambre.
+    </p>
+
+</div>
+
+<div id="menu" class="pagina">
+
+<h2 class="titulo">🍔 Comida Rápida</h2>
+
+<section class="contenedor">
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1000">
+        <h3>Hamburguesa</h3>
+        <p>Q45.00</p>
+        <button onclick="agregarCarrito('Hamburguesa',45)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1000">
+        <h3>Pizza</h3>
+        <p>Q80.00</p>
+        <button onclick="agregarCarrito('Pizza',80)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://foodiclab.com/wp-content/uploads/2025/03/image-16-1.jpg">
+        <h3>Papas Locas</h3>
+        <p>Q35.00</p>
+        <button onclick="agregarCarrito('Papas Locas',35)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://tb-static.uber.com/prod/image-proc/processed_images/7a34c4b398e75a2ac5f0adb5ff6e0d87/70aa2a4db7f990373ca9c376323e3dea.jpeg">
+        <h3>Hot Dog</h3>
+        <p>Q30.00</p>
+        <button onclick="agregarCarrito('Hot Dog',30)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2J3V3Ru1FUuK8UIqfsfn2DF33aX8jzIHIxw&s">
+        <h3>Tacos</h3>
+        <p>Q40.00</p>
+        <button onclick="agregarCarrito('Tacos',40)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?q=80&w=1000">
+        <h3>Burritos</h3>
+        <p>Q50.00</p>
+        <button onclick="agregarCarrito('Burritos',50)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?q=80&w=1000">
+        <h3>Nachos</h3>
+        <p>Q38.00</p>
+        <button onclick="agregarCarrito('Nachos',38)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1608039755401-742074f0548d?q=80&w=1000">
+        <h3>Alitas</h3>
+        <p>Q60.00</p>
+        <button onclick="agregarCarrito('Alitas',60)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?q=80&w=1000">
+        <h3>Sandwich</h3>
+        <p>Q35.00</p>
+        <button onclick="agregarCarrito('Sandwich',35)">Agregar</button>
+    </div>
+
+</section>
+
+<h2 class="titulo">🥤 Bebidas</h2>
+
+<section class="contenedor">
+
+    <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqKW1GkXG0NaON8piPJ96QJ_0qk3_MIFwFtQ&s">
+        <h3>Pepsi</h3>
+        <p>Q10.00</p>
+        <button onclick="agregarCarrito('Pepsi',10)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc2g6tSa1x1VYFVct0fqnPL6bOcLiVaWS2_w&s">
+        <h3>Sprite</h3>
+        <p>Q10.00</p>
+        <button onclick="agregarCarrito('Sprite',10)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=1000">
+        <h3>Limonada</h3>
+        <p>Q15.00</p>
+        <button onclick="agregarCarrito('Limonada',15)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1499638673689-79a0b5115d87?q=80&w=1000">
+        <h3>Té Frío</h3>
+        <p>Q12.00</p>
+        <button onclick="agregarCarrito('Té Frío',12)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1000">
+        <h3>Café</h3>
+        <p>Q18.00</p>
+        <button onclick="agregarCarrito('Café',18)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1577805947697-89e18249d767?q=80&w=1000">
+        <h3>Milkshake</h3>
+        <p>Q25.00</p>
+        <button onclick="agregarCarrito('Milkshake',25)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1600271886742-f049cd451bba?q=80&w=1000">
+        <h3>Jugo Natural</h3>
+        <p>Q20.00</p>
+        <button onclick="agregarCarrito('Jugo Natural',20)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://lahora.gt/wp-content/uploads/sites/5/2026/03/Verano-Gallo-14.jpg">
+        <h3>Gallo</h3>
+        <p>Q15.00</p>
+        <button onclick="agregarCarrito('Gallo',15)">Agregar</button>
+    </div>
+
+</section>
+
+<h2 class="titulo">🍰 Postres</h2>
+
+<section class="contenedor">
+
+    <div class="card">
+        <img src="https://cdn7.kiwilimon.com/recetaimagen/39525/640x640/51668.png.webp">
+        <h3>Dona</h3>
+        <p>Q12.00</p>
+        <button onclick="agregarCarrito('Dona',12)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://www.laylita.com/recetas/wp-content/uploads/2018/09/1-Receta-del-tres-leches.jpg">
+        <h3>Pastel de 3 Leches</h3>
+        <p>Q30.00</p>
+        <button onclick="agregarCarrito('Pastel de 3 Leches',30)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=80&w=1000">
+        <h3>Brownie</h3>
+        <p>Q20.00</p>
+        <button onclick="agregarCarrito('Brownie',20)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?q=80&w=1000">
+        <h3>Helado</h3>
+        <p>Q18.00</p>
+        <button onclick="agregarCarrito('Helado',18)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://cdn-ilddihb.nitrocdn.com/MgqZCGPEMHvMRLsisMUCAIMWvgGMxqaj/assets/images/optimized/rev-c683854/www.goya.com/wp-content/uploads/2023/10/flan-de-queso-caramel-topped-cream-cheese-custard-900x900.jpg">
+        <h3>Flan</h3>
+        <p>Q15.00</p>
+        <button onclick="agregarCarrito('Flan',15)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr6-AQrjZiGZMSpL2I683JT5YpiJKEVk5xuA&s">
+        <h3>Plato de Frutas</h3>
+        <p>Q14.00</p>
+        <button onclick="agregarCarrito('Plato de Frutas',14)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?q=80&w=1000">
+        <h3>Galletas</h3>
+        <p>Q10.00</p>
+        <button onclick="agregarCarrito('Galletas',10)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="https://www.giallozafferano.es/images/16-1616/churros_1200x800.jpg">
+        <h3>Churros</h3>
+        <p>Q16.00</p>
+        <button onclick="agregarCarrito('Churros',16)">Agregar</button>
+    </div>
+
+</section>
+
+</div>
+
+<div id="carrito-pagina" class="pagina">
+
+<section id="carrito">
+
+    <h2 class="titulo">🛒 Carrito</h2>
+
+    <ul id="lista-carrito"></ul>
+
+    <h3 id="total">Total: Q0</h3>
+
+    <button class="btn-pagar" onclick="mostrarPago()">Pagar</button>
+
+</section>
+
+<section id="pago" style="display:none;">
+
+    <h2 style="text-align:center; margin-bottom:20px;">Pago</h2>
+
+    <input type="text" id="nombre-cliente" placeholder="Nombre completo">
+
+    <select id="metodo-pago">
+        <option>Tipo de tarjeta</option>
+        <option>Visa</option>
+        <option>MasterCard</option>
+        <option>American Express</option>
+    </select>
+
+    <input type="number" placeholder="Número de tarjeta">
+
+    <input type="date" placeholder="Fecha de vencimiento">
+
+    <input type="number" placeholder="CVV">
+
+    <button onclick="finalizarCompra()">Finalizar Pedido</button>
+
+</section>
+
+<div id="mensaje">
+    ✅ Gracias por su compra. Redirigiendo pedido a WhatsApp...
+</div>
+
+</div>
+
+<div id="contacto-pagina" class="pagina">
+
+<section id="contacto">
+
+    <h2 class="titulo">📞 Contacto</h2>
+
+    <p>📱 WhatsApp: 4161-2472</p>
+    <p>📘 Facebook: Pura Hambre</p>
+    <p>📸 Instagram: @PuraHambreGT</p>
+    <p>📍 Guatemala</p>
+
+</section>
+
+</div>
+
+<footer>
+
+    <p>© 2026 Pura Hambre - Proyecto Universitario</p>
+
+    <p style="margin-top:10px;">
+        <a href="about:blank" target="_blank">Política de Privacidad</a> | <a href="about:blank" target="_blank">Términos y Condiciones</a>
+    </p>
+
+    <p style="margin-top:10px;">
+        Sitio web seguro para fines educativos y demostrativos.
+    </p>
+
+</footer>
+
+<script>
+
+    let total = 0;
+
+    function agregarCarrito(nombre, precio){
+
+        let lista = document.getElementById('lista-carrito');
+
+        let item = document.createElement('li');
+
+        item.textContent = nombre + ' - Q' + precio;
+
+        lista.appendChild(item);
+
+        total += precio;
+
+        document.getElementById('total').textContent = 'Total: Q' + total;
+
+        alert(nombre + ' agregado al carrito');
+    }
+
+    function mostrarPago(){
+
+        mostrarPagina('carrito-pagina');
+
+        document.getElementById('pago').style.display = 'block';
+    }
+
+    function mostrarPagina(id){
+
+        let paginas = document.querySelectorAll('.pagina');
+
+        paginas.forEach(function(pagina){
+            pagina.classList.remove('activa');
+        });
+
+        document.getElementById(id).classList.add('activa');
+        
+        if(id !== 'carrito-pagina') {
+            document.getElementById('mensaje').style.display = 'none';
+        }
+    }
+
+    function finalizarCompra(){
+        const nombre = document.getElementById('nombre-cliente').value;
+        const items = document.getElementById('lista-carrito').innerText;
+        const totalActual = document.getElementById('total').innerText;
+
+        if(nombre === "" || items === "") {
+            alert("Por favor ingresa tu nombre y agrega productos.");
+            return;
+        }
+
+        const mensajeWA = encodeURIComponent(
+            "PEDIDO PURA HAMBRE\n\n" +
+            "Cliente: " + nombre + "\n" +
+            "Detalle: \n" + items + "\n\n" +
+            totalActual
+        );
+
+        const numeroEmpresa = "50241612472"; 
+
+        window.open("https://wa.me/" + numeroEmpresa + "?text=" + mensajeWA, '_blank');
+
+        document.getElementById('mensaje').style.display = 'block';
+        document.getElementById('pago').style.display = 'none';
+
+        alert('Pedido realizado con éxito');
+    }
+
+</script>
+
+	<a href="https://wa.me/50241612472?text=Hola,%20tengo%20una%20consulta" class="whatsapp-float" target="_blank">
+    	<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+</a>
+
+</body>
+</html>
